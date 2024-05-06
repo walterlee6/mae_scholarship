@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:scholarship_application/landings/intro_landing.dart';
+import 'package:scholarship_application/pages/chart.dart';
+import 'firebase_options.dart';
 import 'package:scholarship_application/pages/auth_page.dart';
 import 'package:scholarship_application/pages/login_page.dart';
-import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
       title: 'Scholarship Application',
       theme: ThemeData(fontFamily: 'Lato'),
       debugShowCheckedModeBanner: false,
-      home: AuthPage(),
+      home: IntroLandingPage(),
     );
   }
 }

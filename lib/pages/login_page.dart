@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -7,7 +8,9 @@ import '../utils/colors.dart';
 
 class LoginPage extends StatefulWidget {
   final Function()? onTap;
-  const LoginPage({super.key, required this.onTap});
+  final String role;
+
+  const LoginPage({super.key, required this.onTap, required this.role});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -29,10 +32,26 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
+
+      // FirebaseFirestore.instance
+      //     .collection("users")
+      //     .doc(userCredential.user!.uid)
+      //     .get()
+      //     .then((DocumentSnapshot documentSnapshot) {
+      //   if (documentSnapshot.exists) {
+      //     String userRole = documentSnapshot.get("role");
+
+      //     switch (userRole) {
+      //       case 'Admin'
+      //     }
+      //   }
+      // });
+
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       // if (e.code == 'user-not-found') {
@@ -135,6 +154,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(height: 5),
                   MyTextField(
+                    controller: emailController,
                     hintText: "Your Email",
                     obscureText: false,
                   ),
@@ -156,6 +176,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(height: 5),
                   MyTextField(
+                    controller: passwordController,
                     hintText: "Your Password",
                     obscureText: true,
                   ),
@@ -194,7 +215,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

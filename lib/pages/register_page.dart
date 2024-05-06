@@ -5,14 +5,19 @@ import 'package:scholarship_application/components/RoleOptionCard.dart';
 import 'package:scholarship_application/components/my_button.dart';
 import 'package:scholarship_application/components/my_textfield.dart';
 import 'package:scholarship_application/landings/register_landing.dart';
+import 'package:scholarship_application/pages/auth_page.dart';
+import 'package:scholarship_application/pages/login_page.dart';
 import 'package:scholarship_application/utils/colors.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
+  final String role;
 
   const RegisterPage({
     super.key,
     required this.onTap,
+    required this.role,
   });
 
   @override
@@ -24,13 +29,66 @@ class _RegisterPageState extends State<RegisterPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
-  bool showLoginPage = true;
+  // bool showLoginPage = true;
 
-  void userRegister() async {
-    RegisterLandingPage(
-      onTap: () {},
+  void _navigateToLoginPage(BuildContext context, String role) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LoginPage(
+          onTap: widget.onTap,
+          role: role,
+        ),
+      ),
     );
+  }
 
+  void chooseRole(BuildContext context, String role) async {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return Container(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SizedBox(height: 20),
+              RoleOptionCard(
+                role: 'Student',
+                icon: Icons.school,
+                onPressed: () {
+                  userRegister("Student");
+                  _navigateToLoginPage(context, role);
+                },
+              ),
+              SizedBox(height: 20),
+              RoleOptionCard(
+                role: 'Admin',
+                icon: Icons.admin_panel_settings,
+                onPressed: () {
+                  userRegister("Admin");
+                  _navigateToLoginPage(context, role);
+                },
+              ),
+              SizedBox(height: 20),
+              RoleOptionCard(
+                role: 'Provider',
+                icon: Icons.verified_rounded,
+                onPressed: () {
+                  userRegister("Provider");
+                  _navigateToLoginPage(context, role);
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void userRegister(String role) async {
     showDialog(
       context: context,
       builder: (context) {
@@ -45,6 +103,21 @@ class _RegisterPageState extends State<RegisterPage> {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text,
           password: passwordController.text,
+        );
+
+        await FirebaseFirestore.instance.collection("users").doc().set({
+          "email": emailController.text,
+          "role": role,
+        });
+
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LoginPage(
+              onTap: () {},
+              role: role,
+            ),
+          ),
         );
       } else {
         showErrorMessage("Passwords do not match");
@@ -77,12 +150,6 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  void togglePages() {
-    setState(() {
-      showLoginPage = !showLoginPage;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,7 +164,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
                     child: Row(
                       children: [
                         Icon(Icons.arrow_back_ios),
@@ -143,6 +212,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   SizedBox(height: 5),
                   MyTextField(
+                    controller: emailController,
                     hintText: "Your Email",
                     obscureText: false,
                   ),
@@ -164,6 +234,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   SizedBox(height: 5),
                   MyTextField(
+                    controller: passwordController,
                     hintText: "Your Password",
                     obscureText: true,
                   ),
@@ -173,7 +244,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Row(
                       children: [
                         Text(
-                          "Password",
+                          "Confirm Password",
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -185,29 +256,15 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   SizedBox(height: 5),
                   MyTextField(
+                    controller: confirmPasswordController,
                     hintText: "Confirm Password",
                     obscureText: true,
                   ),
-                  SizedBox(height: 10),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Forgot Password?",
-                          style: TextStyle(
-                            color: Color.fromRGBO(95, 95, 95, 1),
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                   SizedBox(height: 20),
                   MyButton(
-                    onTap: userRegister,
+                    onTap: () {
+                      chooseRole(context, widget.role);
+                    },
                     text: "Register",
                   ),
                   SizedBox(height: 10),
@@ -223,7 +280,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
