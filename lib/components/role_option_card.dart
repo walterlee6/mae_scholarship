@@ -15,7 +15,7 @@ class RoleOptionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 4,
+      elevation: 3,
       child: InkWell(
         onTap: onPressed,
         child: Padding(

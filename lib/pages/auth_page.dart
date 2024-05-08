@@ -6,6 +6,7 @@ import 'package:scholarship_application/pages/chart.dart';
 import 'package:scholarship_application/pages/home_page.dart';
 import 'package:scholarship_application/pages/login_or_register_page.dart';
 import 'package:scholarship_application/pages/login_page.dart';
+import 'package:scholarship_application/admin/admin_page.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
@@ -53,9 +54,9 @@ class AuthPage extends StatelessWidget {
                     if (role == 'Student') {
                       return HomePage();
                     } else if (role == 'Admin') {
-                      return Chart();
+                      return AdminPage();
                     } else if (role == 'Provider') {
-                      return HomePage();
+                      return Chart();
                     } else {
                       return Container();
                     }

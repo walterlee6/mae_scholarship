@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:scholarship_application/components/RoleOptionCard.dart';
+import 'package:scholarship_application/components/role_option_card.dart';
 import 'package:scholarship_application/components/my_button.dart';
 import 'package:scholarship_application/components/my_textfield.dart';
 import 'package:scholarship_application/landings/register_landing.dart';
@@ -27,18 +27,6 @@ class _RegisterPageState extends State<RegisterPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
-  // bool showLoginPage = true;
-
-  void _navigateToLoginPage(BuildContext context, String role) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => LoginPage(
-          onTap: widget.onTap,
-        ),
-      ),
-    );
-  }
 
   void chooseRole() async {
     showModalBottomSheet(
@@ -55,7 +43,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 role: 'Student',
                 icon: Icons.school,
                 onPressed: () {
-                  handleRegister(role: "Student");
+                  handleRegister(chosenRole: "Student");
+                  Navigator.pop(context);
                 },
               ),
               SizedBox(height: 20),
@@ -63,7 +52,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 role: 'Admin',
                 icon: Icons.admin_panel_settings,
                 onPressed: () {
-                  handleRegister(role: "Admin");
+                  handleRegister(chosenRole: "Admin");
+                  Navigator.pop(context);
                 },
               ),
               SizedBox(height: 20),
@@ -71,7 +61,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 role: 'Provider',
                 icon: Icons.verified_rounded,
                 onPressed: () {
-                  handleRegister(role: "Provider");
+                  handleRegister(chosenRole: "Provider");
+                  Navigator.pop(context);
                 },
               ),
             ],
@@ -81,16 +72,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Future<void> handleRegister({required String role}) async {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return Center(
-          child: CircularProgressIndicator(),
-        );
-      },
-    );
-
+  Future<void> handleRegister({required String chosenRole}) async {
     try {
       if (passwordController.text == confirmPasswordController.text) {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -101,19 +83,13 @@ class _RegisterPageState extends State<RegisterPage> {
         await FirebaseFirestore.instance.collection("users").doc().set(
           {
             "email": emailController.text,
-            "role": role,
+            "role": chosenRole,
           },
         );
-
-        Navigator.pop(context);
-        Navigator.pop(context);
       } else {
-        Navigator.pop(context);
-
         showErrorMessage("Passwords do not match");
       }
     } on FirebaseAuthException catch (e) {
-      Navigator.pop(context);
       showErrorMessage(e.code);
     }
   }
