@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:scholarship_application/landings/intro_landing.dart';
-import 'package:scholarship_application/provider/chart.dart';
 import 'firebase_options.dart';
-import 'package:scholarship_application/pages/auth_page.dart';
-import 'package:scholarship_application/pages/login_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

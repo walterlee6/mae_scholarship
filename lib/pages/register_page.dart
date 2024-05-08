@@ -4,8 +4,6 @@ import 'package:lottie/lottie.dart';
 import 'package:scholarship_application/components/role_option_card.dart';
 import 'package:scholarship_application/components/my_button.dart';
 import 'package:scholarship_application/components/my_textfield.dart';
-import 'package:scholarship_application/pages/auth_page.dart';
-import 'package:scholarship_application/pages/login_page.dart';
 import 'package:scholarship_application/utils/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 

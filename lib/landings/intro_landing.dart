@@ -3,7 +3,6 @@ import 'package:lottie/lottie.dart';
 import 'package:scholarship_application/components/my_button.dart';
 import 'package:scholarship_application/modal/content_modal.dart';
 import 'package:scholarship_application/pages/auth_page.dart';
-import 'package:scholarship_application/pages/login_page.dart';
 import 'package:scholarship_application/utils/colors.dart';
 
 class IntroLandingPage extends StatefulWidget {
@@ -92,12 +91,15 @@ class _IntroLandingPageState extends State<IntroLandingPage> {
                               ),
                             ),
                             SizedBox(height: 20),
-                            MyButton(
-                              onTap: handleLogin,
-                              text: currentIndex ==
-                                      IntroLandingContent.contents.length - 1
-                                  ? "Continue"
-                                  : "Next",
+                            Container(
+                              width: 250,
+                              child: MyButton(
+                                onTap: handleLogin,
+                                text: currentIndex ==
+                                        IntroLandingContent.contents.length - 1
+                                    ? "Continue"
+                                    : "Next",
+                              ),
                             ),
                           ],
                         );
