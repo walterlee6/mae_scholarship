@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:scholarship_application/components/my_button.dart';
 import 'package:scholarship_application/components/my_textfield.dart';
-import 'package:scholarship_application/pages/chart.dart';
-import 'package:scholarship_application/pages/home_page.dart';
+import 'package:scholarship_application/provider/chart.dart';
+import 'package:scholarship_application/student/home_page.dart';
 import '../utils/colors.dart';
 
 class LoginPage extends StatefulWidget {

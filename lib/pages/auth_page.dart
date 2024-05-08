@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:scholarship_application/pages/chart.dart';
-import 'package:scholarship_application/pages/home_page.dart';
+import 'package:scholarship_application/provider/chart.dart';
+import 'package:scholarship_application/student/home_page.dart';
 import 'package:scholarship_application/pages/login_or_register_page.dart';
 import 'package:scholarship_application/pages/login_page.dart';
 import 'package:scholarship_application/admin/admin_page.dart';
