@@ -12,12 +12,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
-  final String role;
 
   const RegisterPage({
     super.key,
     required this.onTap,
-    required this.role,
   });
 
   @override
@@ -37,16 +35,14 @@ class _RegisterPageState extends State<RegisterPage> {
       MaterialPageRoute(
         builder: (context) => LoginPage(
           onTap: widget.onTap,
-          role: role,
         ),
       ),
     );
   }
 
-  void chooseRole(BuildContext context, String role) async {
+  void chooseRole() async {
     showModalBottomSheet(
       context: context,
-      isScrollControlled: true,
       builder: (BuildContext context) {
         return Container(
           padding: EdgeInsets.all(20),
@@ -59,8 +55,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 role: 'Student',
                 icon: Icons.school,
                 onPressed: () {
-                  userRegister("Student");
-                  _navigateToLoginPage(context, role);
+                  handleRegister(role: "Student");
                 },
               ),
               SizedBox(height: 20),
@@ -68,8 +63,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 role: 'Admin',
                 icon: Icons.admin_panel_settings,
                 onPressed: () {
-                  userRegister("Admin");
-                  _navigateToLoginPage(context, role);
+                  handleRegister(role: "Admin");
                 },
               ),
               SizedBox(height: 20),
@@ -77,8 +71,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 role: 'Provider',
                 icon: Icons.verified_rounded,
                 onPressed: () {
-                  userRegister("Provider");
-                  _navigateToLoginPage(context, role);
+                  handleRegister(role: "Provider");
                 },
               ),
             ],
@@ -88,7 +81,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  void userRegister(String role) async {
+  Future<void> handleRegister({required String role}) async {
     showDialog(
       context: context,
       builder: (context) {
@@ -105,25 +98,20 @@ class _RegisterPageState extends State<RegisterPage> {
           password: passwordController.text,
         );
 
-        await FirebaseFirestore.instance.collection("users").doc().set({
-          "email": emailController.text,
-          "role": role,
-        });
-
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => LoginPage(
-              onTap: () {},
-              role: role,
-            ),
-          ),
+        await FirebaseFirestore.instance.collection("users").doc().set(
+          {
+            "email": emailController.text,
+            "role": role,
+          },
         );
+
+        Navigator.pop(context);
+        Navigator.pop(context);
       } else {
+        Navigator.pop(context);
+
         showErrorMessage("Passwords do not match");
       }
-
-      Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
       showErrorMessage(e.code);
@@ -263,7 +251,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   SizedBox(height: 20),
                   MyButton(
                     onTap: () {
-                      chooseRole(context, widget.role);
+                      chooseRole();
                     },
                     text: "Register",
                   ),

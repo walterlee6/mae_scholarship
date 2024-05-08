@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:scholarship_application/components/my_button.dart';
 import 'package:scholarship_application/components/my_textfield.dart';
+import 'package:scholarship_application/pages/chart.dart';
+import 'package:scholarship_application/pages/home_page.dart';
 import '../utils/colors.dart';
 
 class LoginPage extends StatefulWidget {
   final Function()? onTap;
-  final String role;
 
-  const LoginPage({super.key, required this.onTap, required this.role});
+  const LoginPage({super.key, required this.onTap});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -21,7 +22,9 @@ class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  void userLogin() async {
+  Future<void> handleLogin() async {
+    if (!mounted) return;
+
     showDialog(
       context: context,
       builder: (context) {
@@ -32,34 +35,20 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     try {
-      UserCredential userCredential =
-          await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
 
-      // FirebaseFirestore.instance
-      //     .collection("users")
-      //     .doc(userCredential.user!.uid)
-      //     .get()
-      //     .then((DocumentSnapshot documentSnapshot) {
-      //   if (documentSnapshot.exists) {
-      //     String userRole = documentSnapshot.get("role");
-
-      //     switch (userRole) {
-      //       case 'Admin'
-      //     }
-      //   }
-      // });
-
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
-      // if (e.code == 'user-not-found') {
-      //   print('No user found for that email.');
-      // } else if (e.code == 'wrong-password') {
-      //   print('Wrong password provided for that user.');
-      // }
       Navigator.pop(context);
+
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
       showErrorMessage(e.code);
     }
   }
@@ -199,7 +188,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(height: 20),
                   MyButton(
-                    onTap: userLogin,
+                    onTap: handleLogin,
                     text: "Login",
                   ),
                   SizedBox(height: 10),

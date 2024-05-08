@@ -4,8 +4,7 @@ import 'package:scholarship_application/pages/login_page.dart';
 import 'package:scholarship_application/pages/register_page.dart';
 
 class LoginOrRegisterPage extends StatefulWidget {
-  final String role;
-  const LoginOrRegisterPage({super.key, required this.role});
+  const LoginOrRegisterPage({super.key});
 
   @override
   State<LoginOrRegisterPage> createState() => _LoginOrRegisterPageState();
@@ -25,12 +24,10 @@ class _LoginOrRegisterPageState extends State<LoginOrRegisterPage> {
     if (showLoginPage) {
       return LoginPage(
         onTap: togglePages,
-        role: widget.role,
       );
     } else {
       return RegisterPage(
         onTap: togglePages,
-        role: widget.role,
       );
     }
   }

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:scholarship_application/landings/register_landing.dart';
@@ -15,10 +16,59 @@ class AuthPage extends StatelessWidget {
       body: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
           if (snapshot.hasData) {
-            return Chart();
+            User? user = FirebaseAuth.instance.currentUser;
+
+            if (user != null) {
+              String? userEmail = user.email;
+
+              return FutureBuilder<DocumentSnapshot>(
+                future: FirebaseFirestore.instance
+                    .collection('users')
+                    .where('email', isEqualTo: userEmail)
+                    .get()
+                    .then((QuerySnapshot querySnapshot) {
+                  if (querySnapshot.docs.isNotEmpty) {
+                    return querySnapshot.docs.first;
+                  } else {
+                    return Future.value(null);
+                  }
+                }),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+
+                  if (snapshot.hasData) {
+                    final role = snapshot.data!['role'];
+
+                    if (role == 'Student') {
+                      return HomePage();
+                    } else if (role == 'Admin') {
+                      return Chart();
+                    } else if (role == 'Provider') {
+                      return HomePage();
+                    } else {
+                      return Container();
+                    }
+                  } else {
+                    return Container();
+                  }
+                },
+              );
+            } else {
+              return LoginOrRegisterPage();
+            }
           } else {
-            return LoginOrRegisterPage(role: 'someRole');
+            return LoginOrRegisterPage();
           }
         },
       ),
