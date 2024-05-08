@@ -25,7 +25,8 @@ class IntroLandingContent {
     IntroLandingContent(
       image: 'assets/Lottie/student_onboarding_p3.json',
       title: 'Start Your Scholarship',
-      description: 'We provided comprehensive scholarship sources in Malaysia',
+      description:
+          'We provided comprehensive scholarship sources for students who study in Malaysia',
     ),
   ];
 }

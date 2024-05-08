@@ -28,7 +28,7 @@ class _IntroLandingPageState extends State<IntroLandingPage> {
     super.dispose();
   }
 
-  void userLogin() {
+  void handleLogin() {
     if (currentIndex == IntroLandingContent.contents.length - 1) {
       Navigator.push(
         context,
@@ -91,9 +91,9 @@ class _IntroLandingPageState extends State<IntroLandingPage> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 100),
+                            SizedBox(height: 20),
                             MyButton(
-                              onTap: userLogin,
+                              onTap: handleLogin,
                               text: currentIndex ==
                                       IntroLandingContent.contents.length - 1
                                   ? "Continue"

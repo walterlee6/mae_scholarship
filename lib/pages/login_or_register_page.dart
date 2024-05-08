@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:scholarship_application/landings/register_landing.dart';
 import 'package:scholarship_application/pages/login_page.dart';
 import 'package:scholarship_application/pages/register_page.dart';
 
