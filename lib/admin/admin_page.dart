@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scholarship_application/admin/navigation_bar.dart';
 import 'package:scholarship_application/admin/top_screen.dart';
 
 class AdminPage extends StatelessWidget {
@@ -16,6 +17,7 @@ class AdminPage extends StatelessWidget {
           TopScreen(),
         ],
       ),
+      bottomNavigationBar: NaviBar(),
     );
   }
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:scholarship_application/admin/chatbot.dart';
 import 'package:scholarship_application/admin/user_manual.dart';
 
-class NavigationBar extends StatelessWidget {
-  const NavigationBar({super.key});
+class NaviBar extends StatelessWidget {
+  const NaviBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +44,19 @@ class NavigationBar extends StatelessWidget {
                   );
                 },
                 color: Colors.orange,
+              ),
+            ),
+            Container(
+              color: Colors.pink.withOpacity(0.3),
+              child: IconButton(
+                icon: Icon(Icons.chat_bubble),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Chatbot()),
+                  );
+                },
+                color: Colors.pink,
               ),
             ),
           ],
