@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:scholarship_application/modal/message.dart';
+import 'package:scholarship_application/modal/bot_message.dart';
 
 final getAllMessagesProvider =
     StreamProvider.autoDispose.family<Iterable<Message>, String>((ref, userId) {

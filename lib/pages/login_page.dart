@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -25,6 +26,12 @@ class _LoginPageState extends State<LoginPage> {
         email: emailController.text,
         password: passwordController.text,
       );
+
+      // await FirebaseFirestore.instance.collection("users").doc().set(
+      //   {
+      //     "email": emailController.text,
+      //   },
+      // );
     } on FirebaseAuthException catch (e) {
       // if (e.code == 'user-not-found') {
       //   print('No user found for that email.');

@@ -1,11 +1,9 @@
-import 'dart:html';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:scholarship_application/extensions/extensions.dart';
-import 'package:scholarship_application/modal/message.dart';
+import 'package:scholarship_application/modal/bot_message.dart';
 import 'package:scholarship_application/repositories/storage_repository.dart';
 import 'package:uuid/uuid.dart';
 
@@ -57,7 +55,12 @@ class ChatRepository {
         final mimeType = image.getMimeTypeFromExtension();
         final imagePart = DataPart(mimeType, imageBytes);
 
-        response = await imageModel.generateContent([Content.multi([prompt, imagePart,])]);
+        response = await imageModel.generateContent([
+          Content.multi([
+            prompt,
+            imagePart,
+          ])
+        ]);
       }
       final responseText = response.text;
       final receivedMessageId = Uuid().v4();
@@ -102,8 +105,9 @@ class ChatRepository {
           .collection('messages')
           .doc(sentMessageId)
           .set(message.toMap());
-      
-      final response = await textModel.generateContent([Content.text(textPrompt)]);
+
+      final response =
+          await textModel.generateContent([Content.text(textPrompt)]);
       final responseText = response.text;
       final receivedMessageId = Uuid().v4();
       final responseMessage = Message(

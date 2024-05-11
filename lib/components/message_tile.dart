@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scholarship_application/modal/message.dart';
+import 'package:scholarship_application/modal/bot_message.dart';
 
 class MessageTile extends StatelessWidget {
   final Message message;

@@ -72,13 +72,17 @@ class _RegisterPageState extends State<RegisterPage> {
   Future<void> handleRegister({required String chosenRole}) async {
     try {
       if (passwordController.text == confirmPasswordController.text) {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        UserCredential userCredential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text,
           password: passwordController.text,
         );
 
-        await FirebaseFirestore.instance.collection("users").doc().set(
+        User? user = userCredential.user;
+
+        await FirebaseFirestore.instance.collection("users").doc(user!.uid).set(
           {
+            "uid": user.uid,
             "email": emailController.text,
             "role": chosenRole,
           },

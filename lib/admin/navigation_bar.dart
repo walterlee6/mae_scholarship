@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scholarship_application/admin/chatbot.dart';
+import 'package:scholarship_application/admin/chatbox.dart';
 import 'package:scholarship_application/admin/user_manual.dart';
 
 class NaviBar extends StatelessWidget {
@@ -28,7 +29,10 @@ class NaviBar extends StatelessWidget {
               child: IconButton(
                 icon: Icon(Icons.person),
                 onPressed: () {
-                  Navigator.pushNamed(context, '/profile');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Chatbox()),
+                  );
                 },
                 color: Colors.green,
               ),
@@ -40,7 +44,7 @@ class NaviBar extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const UserManual()),
+                    MaterialPageRoute(builder: (context) => UserManual()),
                   );
                 },
                 color: Colors.orange,
@@ -53,7 +57,7 @@ class NaviBar extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const Chatbot()),
+                    MaterialPageRoute(builder: (context) => Chatbot()),
                   );
                 },
                 color: Colors.pink,
