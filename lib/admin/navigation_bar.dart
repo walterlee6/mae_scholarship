@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:scholarship_application/admin/chatbot.dart';
 import 'package:scholarship_application/admin/chatbox.dart';
+import 'package:scholarship_application/admin/map_page.dart';
+import 'package:scholarship_application/admin/testing_map_page.dart';
 import 'package:scholarship_application/admin/user_manual.dart';
 
 class NaviBar extends StatelessWidget {
@@ -22,6 +24,19 @@ class NaviBar extends StatelessWidget {
                   Navigator.pushNamed(context, '/home');
                 },
                 color: Colors.blue,
+              ),
+            ),
+            Container(
+              color: Colors.grey.withOpacity(0.3),
+              child: IconButton(
+                icon: Icon(Icons.map),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MapPage()),
+                  );
+                },
+                color: Colors.grey,
               ),
             ),
             Container(
