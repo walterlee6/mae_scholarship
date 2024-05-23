@@ -4,6 +4,9 @@ import 'package:lottie/lottie.dart';
 import 'package:scholarship_application/components/role_option_card.dart';
 import 'package:scholarship_application/components/my_button.dart';
 import 'package:scholarship_application/components/my_textfield.dart';
+import 'package:scholarship_application/pages/auth_page.dart';
+import 'package:scholarship_application/provider/chart.dart';
+import 'package:scholarship_application/provider/pending_page.dart';
 import 'package:scholarship_application/utils/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -85,8 +88,27 @@ class _RegisterPageState extends State<RegisterPage> {
             "uid": user.uid,
             "email": emailController.text,
             "role": chosenRole,
+            "registration_date": FieldValue.serverTimestamp(),
+            "verified": chosenRole == "Provider" ? false : true,
           },
         );
+
+        // DocumentSnapshot userDoc = await FirebaseFirestore.instance
+        //     .collection('users')
+        //     .doc(user.uid)
+        //     .get();
+
+        // if (userDoc.exists &&
+        //     userDoc['role'] == 'Provider' &&
+        //     userDoc['verified'] == false) {
+        //   Navigator.push(
+        //       context,
+        //       MaterialPageRoute(
+        //           builder: (context) => PendingVerificationPage()));
+        // } else {
+        //   Navigator.push(
+        //       context, MaterialPageRoute(builder: (context) => Chart()));
+        // }
       } else {
         showErrorMessage("Passwords do not match");
       }
@@ -113,6 +135,27 @@ class _RegisterPageState extends State<RegisterPage> {
         );
       },
     );
+  }
+
+  void checkVerificationStatus(BuildContext context, User? user) async {
+    if (user != null) {
+      DocumentSnapshot userDoc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
+      if (userDoc.exists &&
+          userDoc['role'] == 'Provider' &&
+          userDoc['verified'] == false) {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => PendingVerificationPage()));
+      } else {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Chart()));
+      }
+    } else {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => AuthPage()));
+    }
   }
 
   @override

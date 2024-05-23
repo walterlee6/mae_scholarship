@@ -50,4 +50,8 @@ class ChatService {
         .orderBy("timestamp", descending: false)
         .snapshots();
   }
+
+  Future<void> deleteUser(String userID) async {
+    await _firestore.collection("users").doc(userID).delete();
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:scholarship_application/barchart/bar_graph.dart';
 
@@ -6,6 +7,10 @@ class Chart extends StatefulWidget {
 
   @override
   State<Chart> createState() => _ChartState();
+}
+
+void signOut() async {
+  await FirebaseAuth.instance.signOut();
 }
 
 class _ChartState extends State<Chart> {
@@ -22,6 +27,25 @@ class _ChartState extends State<Chart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: signOut,
+            icon: Icon(Icons.logout),
+          ),
+        ],
+      ),
+      //   body: Center(
+      //     child: Text(
+      //       "LOGGED IN AS: " + user.email!,
+      //       style: TextStyle(
+      //         fontSize: 20,
+      //         color: Colors.grey[700],
+      //       ),
+      //     ),
+      //   ),
+      // );
+      // return Scaffold(
       body: Center(
         child: SizedBox(
           height: 400,

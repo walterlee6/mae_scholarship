@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scholarship_application/admin/navigation_bar.dart';
-import 'package:scholarship_application/admin/top_screen.dart';
+import 'package:scholarship_application/admin/welcoming_board.dart';
 
 class AdminPage extends StatelessWidget {
   const AdminPage({super.key});
@@ -8,15 +8,7 @@ class AdminPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Talent Treasure"),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          TopScreen(),
-        ],
-      ),
+      body: WelcomingBoard(),
       bottomNavigationBar: NaviBar(),
     );
   }

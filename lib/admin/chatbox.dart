@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:scholarship_application/admin/chat_page.dart';
+import 'package:scholarship_application/admin/navigation_bar.dart';
 import 'package:scholarship_application/components/user_tile.dart';
 import 'package:scholarship_application/pages/login_page.dart';
 import 'package:scholarship_application/services/chat_service.dart';
@@ -21,6 +22,7 @@ class Chatbox extends StatelessWidget {
         title: Text("Chat"),
       ),
       body: _buildUserList(),
+      bottomNavigationBar: NaviBar(),
     );
   }
 
@@ -40,36 +42,85 @@ class Chatbox extends StatelessWidget {
           );
         }
 
+        List<Map<String, dynamic>> admins = [];
+        List<Map<String, dynamic>> providers = [];
+        List<Map<String, dynamic>> students = [];
+
+        for (var userData in snapshot.data!) {
+          if (userData["role"] == "admin") {
+            admins.add(userData);
+          } else if (userData["role"] == "provider") {
+            providers.add(userData);
+          } else {
+            students.add(userData);
+          }
+        }
+
         return ListView(
-          children: snapshot.data!
-              .map<Widget>(
-                (userData) => _buildUserListItem(userData, context),
-              )
-              .toList(),
+          children: [
+            ...admins.map((userData) => _buildUserTile(userData, context)),
+            ...providers.map((userData) => _buildUserTile(userData, context)),
+            ...students.map((userData) => _buildUserTile(userData, context)),
+          ],
         );
       },
     );
   }
 
-  Widget _buildUserListItem(
-      Map<String, dynamic> userData, BuildContext context) {
-    if (userData["email"] != getCurrentUser()!.email) {
-      return UserTile(
-        text: userData["email"],
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ChatPage(
-                receiverEmail: userData["email"],
-                receiverID: userData["uid"],
-              ),
+  Widget _buildUserTile(Map<String, dynamic> userData, BuildContext context) {
+    bool isCurrentUser = userData["email"] == getCurrentUser()!.email;
+
+    return UserTile(
+      text: userData["email"],
+      role: userData["role"],
+      onChatTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ChatPage(
+              receiverEmail: userData["email"],
+              receiverID: userData["uid"],
             ),
-          );
-        },
-      );
-    } else {
-      return Container();
-    }
+          ),
+        );
+      },
+      onDeleteTap: isCurrentUser
+          ? null
+          : () async {
+              await _chatService.deleteUser(userData["uid"]);
+            },
+    );
+
+    //       return ListView(
+    //         children: snapshot.data!
+    //             .map<Widget>(
+    //               (userData) => _buildUserListItem(userData, context),
+    //             )
+    //             .toList(),
+    //       );
+    //     },
+    //   );
+    // }
+
+    // Widget _buildUserListItem(
+    //     Map<String, dynamic> userData, BuildContext context) {
+    //   if (userData["email"] != getCurrentUser()!.email) {
+    //     return UserTile(
+    //       text: userData["email"],
+    //       onTap: () {
+    //         Navigator.push(
+    //           context,
+    //           MaterialPageRoute(
+    //             builder: (context) => ChatPage(
+    //               receiverEmail: userData["email"],
+    //               receiverID: userData["uid"],
+    //             ),
+    //           ),
+    //         );
+    //       },
+    //     );
+    //   } else {
+    //     return Container();
+    //   }
   }
 }

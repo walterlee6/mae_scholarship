@@ -1,82 +1,70 @@
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:scholarship_application/admin/admin_page.dart';
 import 'package:scholarship_application/admin/chatbot.dart';
 import 'package:scholarship_application/admin/chatbox.dart';
+import 'package:scholarship_application/admin/detailed_graph_page.dart';
 import 'package:scholarship_application/admin/map_page.dart';
 import 'package:scholarship_application/admin/testing_map_page.dart';
+import 'package:scholarship_application/admin/user_management_page.dart';
 import 'package:scholarship_application/admin/user_manual.dart';
+import 'package:scholarship_application/admin/verification_page.dart';
 
 class NaviBar extends StatelessWidget {
   const NaviBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
-      child: SizedBox(
-        height: 60,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Container(
-              color: Colors.blue.withOpacity(0.3),
-              child: IconButton(
-                icon: Icon(Icons.home),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/home');
-                },
-                color: Colors.blue,
-              ),
+    return Container(
+      color: Colors.black,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+        child: GNav(
+          backgroundColor: Colors.black,
+          color: Colors.white,
+          activeColor: Colors.white,
+          tabBackgroundColor: Colors.grey.shade800,
+          gap: 8,
+          tabs: [
+            GButton(
+              icon: Icons.home,
+              text: "Home",
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AdminPage()),
+                );
+              },
             ),
-            Container(
-              color: Colors.grey.withOpacity(0.3),
-              child: IconButton(
-                icon: Icon(Icons.map),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MapPage()),
-                  );
-                },
-                color: Colors.grey,
-              ),
+            GButton(
+              icon: Icons.place,
+              text: "Map",
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Chatbox()),
+                );
+              },
             ),
-            Container(
-              color: Colors.green.withOpacity(0.3),
-              child: IconButton(
-                icon: Icon(Icons.person),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Chatbox()),
-                  );
-                },
-                color: Colors.green,
-              ),
-            ),
-            Container(
-              color: Colors.orange.withOpacity(0.3),
-              child: IconButton(
-                icon: Icon(Icons.library_books),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => UserManual()),
-                  );
-                },
-                color: Colors.orange,
-              ),
-            ),
-            Container(
-              color: Colors.pink.withOpacity(0.3),
-              child: IconButton(
-                icon: Icon(Icons.chat_bubble),
+            GButton(
+                icon: Icons.sms,
+                text: "Messages",
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => Chatbot()),
                   );
-                },
-                color: Colors.pink,
-              ),
+                }),
+            GButton(
+              icon: Icons.settings,
+              text: "Settings",
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ProviderVerificationPage()),
+                );
+              },
             ),
           ],
         ),
