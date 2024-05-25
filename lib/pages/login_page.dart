@@ -26,19 +26,27 @@ class _LoginPageState extends State<LoginPage> {
         email: emailController.text,
         password: passwordController.text,
       );
-
-      // await FirebaseFirestore.instance.collection("users").doc().set(
-      //   {
-      //     "email": emailController.text,
-      //   },
-      // );
     } on FirebaseAuthException catch (e) {
-      // if (e.code == 'user-not-found') {
-      //   print('No user found for that email.');
-      // } else if (e.code == 'wrong-password') {
-      //   print('Wrong password provided for that user.');
-      // }
-      showErrorMessage(e.code);
+      print('Error code: ${e.code}'); // password still cannot validate
+      String errorMessage;
+      switch (e.code) {
+        case 'invalid-email':
+          errorMessage = "The email address is badly formatted.";
+          break;
+        case 'invalid-credential':
+          errorMessage = "Invalid email or password.";
+          break;
+        case 'wrong-password':
+          errorMessage = "Wrong password provided for that user.";
+          break;
+        case 'channel-error':
+          errorMessage = "Empty field detected.";
+          break;
+        default:
+          errorMessage = "An error occurred. Please try again later.";
+      }
+      print('Error message: $errorMessage');
+      showErrorMessage(errorMessage);
     }
   }
 
@@ -63,9 +71,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { // forgot password hasnt done yet
     return Scaffold(
-      backgroundColor: bgColor,
+      backgroundColor: Color.fromARGB(255, 237, 147, 68),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -75,20 +83,20 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  GestureDetector(
-                    onTap: () {},
-                    child: Row(
-                      children: [
-                        Icon(Icons.arrow_back_ios),
-                        Text(
-                          "Back",
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  // GestureDetector(
+                  //   onTap: () {},
+                  //   child: Row(
+                  //     children: [
+                  //       Icon(Icons.arrow_back_ios),
+                  //       Text(
+                  //         "Back",
+                  //         style: TextStyle(
+                  //           fontSize: 20,
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                   SizedBox(height: 20),
                   Text(
                     "Welcome Back",
@@ -102,7 +110,8 @@ class _LoginPageState extends State<LoginPage> {
                     "Login to continue.",
                     style: TextStyle(
                       fontSize: 24,
-                      color: Color.fromRGBO(130, 128, 128, 1),
+                      // color: Color.fromRGBO(130, 128, 128, 1),
+                      color: Colors.white,
                     ),
                   ),
                   SizedBox(height: 20),

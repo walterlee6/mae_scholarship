@@ -1,10 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lottie/lottie.dart';
-import 'package:scholarship_application/landings/intro_landing.dart';
+import 'package:scholarship_application/landings/splash_screen.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -34,39 +32,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
-
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(
-      const Duration(seconds: 5),
-      () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => IntroLandingPage(),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Container(
-          height: 200,
-          width: 200,
-          child: LottieBuilder.asset('assets/Lottie/splash_screen.json'),
-        ),
-      ),
-    );
-  }
-}

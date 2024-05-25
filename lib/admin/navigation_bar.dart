@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:scholarship_application/admin/admin_page.dart';
 import 'package:scholarship_application/admin/chatbot.dart';
@@ -10,21 +11,34 @@ import 'package:scholarship_application/admin/user_management_page.dart';
 import 'package:scholarship_application/admin/user_manual.dart';
 import 'package:scholarship_application/admin/verification_page.dart';
 
-class NaviBar extends StatelessWidget {
+class NaviBar extends StatefulWidget {
   const NaviBar({super.key});
+
+  @override
+  State<NaviBar> createState() => _NaviBarState();
+}
+
+class _NaviBarState extends State<NaviBar> {
+  int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.black,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 3),
         child: GNav(
           backgroundColor: Colors.black,
           color: Colors.white,
           activeColor: Colors.white,
           tabBackgroundColor: Colors.grey.shade800,
-          gap: 8,
+          gap: 2,
+          selectedIndex: _selectedIndex,
+          onTabChange: (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
           tabs: [
             GButton(
               icon: Icons.home,
@@ -37,8 +51,18 @@ class NaviBar extends StatelessWidget {
               },
             ),
             GButton(
-              icon: Icons.place,
-              text: "Map",
+              icon: Icons.auto_graph,
+              text: "Graph",
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DetailedGraphPage()),
+                );
+              },
+            ),
+            GButton(
+              icon: Icons.sms,
+              text: "SMS",
               onPressed: () {
                 Navigator.push(
                   context,
@@ -46,15 +70,6 @@ class NaviBar extends StatelessWidget {
                 );
               },
             ),
-            GButton(
-                icon: Icons.sms,
-                text: "Messages",
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Chatbot()),
-                  );
-                }),
             GButton(
               icon: Icons.settings,
               text: "Settings",

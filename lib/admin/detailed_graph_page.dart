@@ -62,19 +62,29 @@
 
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:scholarship_application/admin/navigation_bar.dart';
 import 'package:scholarship_application/services/firestore_service.dart';
 
-class DetailedGraphPage extends StatefulWidget {
+class DetailedGraphPage extends ConsumerStatefulWidget {
   const DetailedGraphPage({super.key});
 
   @override
   _DetailedGraphPageState createState() => _DetailedGraphPageState();
 }
 
-class _DetailedGraphPageState extends State<DetailedGraphPage> {
+class _DetailedGraphPageState extends ConsumerState<DetailedGraphPage> {
   final FirestoreService _firestoreService = FirestoreService();
   List<FlSpot> _spots = [];
-  final List<String> _daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  final List<String> _daysOfWeek = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+  ];
 
   @override
   void initState() {
@@ -105,6 +115,7 @@ class _DetailedGraphPageState extends State<DetailedGraphPage> {
 
   @override
   Widget build(BuildContext context) {
+    // final selectedIndex = ref.watch(selectedIndexProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text('Detailed Graphs'),
@@ -170,7 +181,7 @@ class _DetailedGraphPageState extends State<DetailedGraphPage> {
           ),
         ),
       ),
+      bottomNavigationBar: NaviBar(),
     );
   }
 }
-

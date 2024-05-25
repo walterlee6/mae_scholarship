@@ -1,12 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:scholarship_application/admin/chat_page.dart';
 import 'package:scholarship_application/admin/navigation_bar.dart';
 import 'package:scholarship_application/components/user_tile.dart';
 import 'package:scholarship_application/pages/login_page.dart';
 import 'package:scholarship_application/services/chat_service.dart';
 
-class Chatbox extends StatelessWidget {
+class Chatbox extends ConsumerWidget {
   Chatbox({super.key});
 
   final ChatService _chatService = ChatService();
@@ -16,7 +17,8 @@ class Chatbox extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // final selectedIndex = ref.watch(selectedIndexProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text("Chat"),

@@ -45,7 +45,7 @@ class _IntroLandingPageState extends State<IntroLandingPage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
+      backgroundColor: Color.fromARGB(255, 251, 174, 73),
       body: SafeArea(
         child: Stack(
           children: [
@@ -61,32 +61,38 @@ class _IntroLandingPageState extends State<IntroLandingPage> {
                           setState(() => currentIndex = index),
                       itemBuilder: (_, index) {
                         return Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            LottieBuilder.asset(
-                              IntroLandingContent.contents[index].image,
+                            SizedBox(height: 100),
+                            Container(
                               height: 300,
+                              child: LottieBuilder.asset(
+                                IntroLandingContent.contents[index].image,
+                              ),
                             ),
                             SizedBox(height: 20),
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16),
                               child: Text(
                                 IntroLandingContent.contents[index].title,
                                 style: TextStyle(
-                                  fontSize: 24,
+                                  fontSize: 28,
                                   fontWeight: FontWeight.bold,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
                             SizedBox(height: 20),
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16),
                               child: Text(
                                 IntroLandingContent.contents[index].description,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 18,
-                                  color: Colors.grey,
+                                  // color: Colors.white,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
@@ -134,7 +140,7 @@ class _IntroLandingPageState extends State<IntroLandingPage> {
       height: 10,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: Colors.blue,
+        color: Colors.deepOrange,
       ),
     );
   }

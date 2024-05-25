@@ -1,12 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:scholarship_application/admin/navigation_bar.dart';
 
-class ProviderVerificationPage extends StatefulWidget {
+class ProviderVerificationPage extends ConsumerStatefulWidget {
   @override
-  _ProviderVerificationPageState createState() => _ProviderVerificationPageState();
+  _ProviderVerificationPageState createState() =>
+      _ProviderVerificationPageState();
 }
 
-class _ProviderVerificationPageState extends State<ProviderVerificationPage> {
+class _ProviderVerificationPageState
+    extends ConsumerState<ProviderVerificationPage> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<void> _verifyProvider(String userId, bool isVerified) async {
@@ -22,7 +26,11 @@ class _ProviderVerificationPageState extends State<ProviderVerificationPage> {
         title: Text('Verify Scholarship Providers'),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: _firestore.collection('users').where('role', isEqualTo: 'Provider').where('verified', isEqualTo: false).snapshots(),
+        stream: _firestore
+            .collection('users')
+            .where('role', isEqualTo: 'Provider')
+            .where('verified', isEqualTo: false)
+            .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
@@ -64,6 +72,7 @@ class _ProviderVerificationPageState extends State<ProviderVerificationPage> {
           );
         },
       ),
+      bottomNavigationBar: NaviBar(),
     );
   }
 }

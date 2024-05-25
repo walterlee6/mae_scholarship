@@ -30,6 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void chooseRole() async {
     showModalBottomSheet(
+      backgroundColor: Color.fromARGB(255, 213, 102, 17),
       context: context,
       builder: (BuildContext context) {
         return Container(
@@ -73,6 +74,8 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Future<void> handleRegister({required String chosenRole}) async {
+    if (!_formKey.currentState!.validate()) return;
+
     try {
       if (passwordController.text == confirmPasswordController.text) {
         UserCredential userCredential =
@@ -113,7 +116,33 @@ class _RegisterPageState extends State<RegisterPage> {
         showErrorMessage("Passwords do not match");
       }
     } on FirebaseAuthException catch (e) {
-      showErrorMessage(e.code);
+      // showErrorMessage(e.code);
+      print('Error code: ${e.code}');
+      String errorMessage;
+      switch (e.code) { // password still cannot validate
+        case 'invalid-email':
+          errorMessage = "The email address is badly formatted.";
+          break;
+        // case 'invalid-credential':
+        //   errorMessage = "Invalid email or password.";
+        //   break;
+        // case 'wrong-password':
+        //   errorMessage = "Wrong password provided for that user.";
+        //   break;
+        case 'channel-error':
+          errorMessage = "Empty field detected.";
+          break;
+        case 'email-already-in-use':
+          errorMessage = 'The email already in use.';
+          break;
+        case 'weak-password':
+          errorMessage = 'The password is too weak.';
+          break;
+        default:
+          errorMessage = "An error occurred. Please try again later.";
+      }
+      print('Error message: $errorMessage');
+      showErrorMessage(errorMessage);
     }
   }
 
@@ -161,7 +190,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
+      backgroundColor: Color.fromARGB(255, 237, 147, 68),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -171,22 +200,22 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Row(
-                      children: [
-                        Icon(Icons.arrow_back_ios),
-                        Text(
-                          "Back",
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     Navigator.pop(context);
+                  //   },
+                  //   child: Row(
+                  //     children: [
+                  //       Icon(Icons.arrow_back_ios),
+                  //       Text(
+                  //         "Back",
+                  //         style: TextStyle(
+                  //           fontSize: 20,
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                   Center(
                     child: LottieBuilder.asset(
                       "assets/Lottie/chicken.json",
