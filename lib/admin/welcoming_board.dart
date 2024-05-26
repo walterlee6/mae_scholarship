@@ -195,7 +195,7 @@ class _WelcomingBoardState extends State<WelcomingBoard> {
             children: providers.map((provider) {
               return Card(
                 elevation: 4,
-                margin: EdgeInsets.symmetric(vertical: 4),
+                margin: EdgeInsets.symmetric(vertical: 10),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -325,62 +325,6 @@ class _WelcomingBoardState extends State<WelcomingBoard> {
               ),
             ),
             SizedBox(height: 20),
-            // Padding(
-            //   padding: EdgeInsets.symmetric(horizontal: 16),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //     children: [
-            //       Text(
-            //         "Monthly Registrations",
-            //         style: TextStyle(
-            //           fontSize: 18,
-            //           fontWeight: FontWeight.bold,
-            //         ),
-            //       ),
-            //       TextButton(
-            //         onPressed: () {
-            //           Navigator.push(
-            //             context,
-            //             MaterialPageRoute(
-            //               builder: (context) => DetailedGraphPage(),
-            //             ),
-            //           );
-            //         },
-            //         child: Text("View All"),
-            //       ),
-            //     ],
-            //   ),
-            // ),
-            // SizedBox(
-            //   height: 300,
-            //   child: Padding(
-            //     padding: EdgeInsets.all(16),
-            //     child: LineChart(
-            //       LineChartData(
-            //         lineBarsData: [
-            //           LineChartBarData(
-            //             spots: [
-            //               FlSpot(0, 10),
-            //               FlSpot(1, 20),
-            //               FlSpot(2, 30),
-            //               FlSpot(3, 40),
-            //               FlSpot(4, 50),
-            //               FlSpot(5, 60),
-            //             ],
-            //             isCurved: true,
-            //             color: Colors.blue,
-            //             dotData: FlDotData(show: true),
-            //             belowBarData: BarAreaData(
-            //               show: true,
-            //               color: Colors.blue.withOpacity(0.3),
-            //             ),
-            //           ),
-            //         ],
-            //       ),
-            //     ),
-            //   ),
-            // ),
-
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: FutureBuilder<List<Map<String, dynamic>>>(
@@ -412,7 +356,7 @@ class _WelcomingBoardState extends State<WelcomingBoard> {
                     };
                     return Container(
                       height: 250,
-                      padding: EdgeInsets.all(16),
+                      padding: EdgeInsets.symmetric(horizontal: 16),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.white,

@@ -57,7 +57,8 @@ class FirestoreService {
     return dayCounts;
   }
 
-  Future<List<Map<String, dynamic>>> getUnverifiedProviders({int limit = 4}) async {
+  Future<List<Map<String, dynamic>>> getUnverifiedProviders(
+      {int limit = 2}) async {
     QuerySnapshot snapshot = await _firestore
         .collection('users')
         .where('role', isEqualTo: 'Provider')
@@ -65,7 +66,9 @@ class FirestoreService {
         .limit(limit)
         .get();
 
-    return snapshot.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
+    return snapshot.docs
+        .map((doc) => doc.data() as Map<String, dynamic>)
+        .toList();
   }
 
   Future<int> getAdminCount() async {
