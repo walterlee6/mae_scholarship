@@ -56,4 +56,39 @@ class FirestoreService {
 
     return dayCounts;
   }
+
+  Future<List<Map<String, dynamic>>> getUnverifiedProviders({int limit = 4}) async {
+    QuerySnapshot snapshot = await _firestore
+        .collection('users')
+        .where('role', isEqualTo: 'Provider')
+        .where('verified', isEqualTo: false)
+        .limit(limit)
+        .get();
+
+    return snapshot.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
+  }
+
+  Future<int> getAdminCount() async {
+    QuerySnapshot querySnapshot = await _firestore
+        .collection('users')
+        .where('role', isEqualTo: 'Admin')
+        .get();
+    return querySnapshot.size;
+  }
+
+  Future<int> getProviderCount() async {
+    QuerySnapshot querySnapshot = await _firestore
+        .collection('users')
+        .where('role', isEqualTo: 'Provider')
+        .get();
+    return querySnapshot.size;
+  }
+
+  Future<int> getStudentCount() async {
+    QuerySnapshot querySnapshot = await _firestore
+        .collection('users')
+        .where('role', isEqualTo: 'Student')
+        .get();
+    return querySnapshot.size;
+  }
 }
