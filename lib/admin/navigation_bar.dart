@@ -4,6 +4,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:scholarship_application/admin/admin_page.dart';
 import 'package:scholarship_application/admin/chatbot.dart';
 import 'package:scholarship_application/admin/chatbox.dart';
+import 'package:scholarship_application/admin/contact_page.dart';
 import 'package:scholarship_application/admin/detailed_graph_page.dart';
 import 'package:scholarship_application/admin/map_page.dart';
 import 'package:scholarship_application/admin/testing_map_page.dart';
@@ -66,7 +67,7 @@ class _NaviBarState extends State<NaviBar> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Chatbox()),
+                  MaterialPageRoute(builder: (context) => ContactPage()),
                 );
               },
             ),
