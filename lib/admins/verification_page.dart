@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:scholarship_application/admin/navigation_bar.dart';
+import 'package:scholarship_application/admins/navigation_bar.dart';
 
 class ProviderVerificationPage extends ConsumerStatefulWidget {
   @override

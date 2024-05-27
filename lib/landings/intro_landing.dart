@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:scholarship_application/components/my_button.dart';
-import 'package:scholarship_application/modal/content_modal.dart';
-import 'package:scholarship_application/pages/auth_page.dart';
+import 'package:scholarship_application/modals/content_modal.dart';
+import 'package:scholarship_application/authentications/auth_page.dart';
 import 'package:scholarship_application/utils/colors.dart';
 
 class IntroLandingPage extends StatefulWidget {

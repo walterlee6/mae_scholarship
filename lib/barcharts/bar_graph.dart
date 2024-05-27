@@ -1,6 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:scholarship_application/barchart/bar_data.dart';
+import 'package:scholarship_application/barcharts/bar_data.dart';
 
 class BarGraph extends StatelessWidget {
   final List weeklySummary;

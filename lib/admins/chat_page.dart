@@ -137,7 +137,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:scholarship_application/components/chat_bubble.dart';
 import 'package:scholarship_application/components/my_textfield.dart';
-import 'package:scholarship_application/services/chat_service.dart';
+import 'package:scholarship_application/services/chat_services.dart';
 
 class ChatPage extends StatefulWidget {
   final String receiverEmail;

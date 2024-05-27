@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:scholarship_application/admin/admin_page.dart';
-import 'package:scholarship_application/admin/chatbot.dart';
-import 'package:scholarship_application/admin/chatbox.dart';
-import 'package:scholarship_application/admin/contact_page.dart';
-import 'package:scholarship_application/admin/detailed_graph_page.dart';
-import 'package:scholarship_application/admin/map_page.dart';
-import 'package:scholarship_application/admin/testing_map_page.dart';
-import 'package:scholarship_application/admin/user_management_page.dart';
-import 'package:scholarship_application/admin/user_manual.dart';
-import 'package:scholarship_application/admin/verification_page.dart';
+import 'package:scholarship_application/admins/admin_page.dart';
+import 'package:scholarship_application/admins/chatbot.dart';
+import 'package:scholarship_application/admins/chatbox.dart';
+import 'package:scholarship_application/admins/contact_page.dart';
+import 'package:scholarship_application/admins/detailed_graph_page.dart';
+import 'package:scholarship_application/admins/map_page.dart';
+import 'package:scholarship_application/admins/testing_map_page.dart';
+import 'package:scholarship_application/admins/user_management_page.dart';
+import 'package:scholarship_application/admins/user_manual.dart';
+import 'package:scholarship_application/admins/verification_page.dart';
 
 class NaviBar extends StatefulWidget {
   const NaviBar({super.key});

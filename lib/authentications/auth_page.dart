@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:scholarship_application/provider/chart.dart';
-import 'package:scholarship_application/student/home_page.dart';
-import 'package:scholarship_application/pages/login_or_register_page.dart';
-import 'package:scholarship_application/admin/admin_page.dart';
+import 'package:scholarship_application/scholarship_providers/provider_page.dart';
+import 'package:scholarship_application/students/student_page.dart';
+import 'package:scholarship_application/authentications/login_or_register_page.dart';
+import 'package:scholarship_application/admins/admin_page.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
@@ -50,7 +50,7 @@ class AuthPage extends StatelessWidget {
                     final role = snapshot.data!['role'];
 
                     if (role == 'Student') {
-                      return HomePage();
+                      return StudentPage();
                     } else if (role == 'Admin') {
                       return AdminPage();
                     } else if (role == 'Provider') {

@@ -4,10 +4,9 @@ import 'package:lottie/lottie.dart';
 import 'package:scholarship_application/components/role_option_card.dart';
 import 'package:scholarship_application/components/my_button.dart';
 import 'package:scholarship_application/components/my_textfield.dart';
-import 'package:scholarship_application/pages/auth_page.dart';
-import 'package:scholarship_application/provider/chart.dart';
-import 'package:scholarship_application/provider/pending_page.dart';
-import 'package:scholarship_application/utils/colors.dart';
+import 'package:scholarship_application/authentications/auth_page.dart';
+import 'package:scholarship_application/scholarship_providers/provider_page.dart';
+import 'package:scholarship_application/scholarship_providers/pending_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -119,7 +118,8 @@ class _RegisterPageState extends State<RegisterPage> {
       // showErrorMessage(e.code);
       print('Error code: ${e.code}');
       String errorMessage;
-      switch (e.code) { // password still cannot validate
+      switch (e.code) {
+        // password still cannot validate
         case 'invalid-email':
           errorMessage = "The email address is badly formatted.";
           break;

@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:scholarship_application/admin/chat_page.dart';
-import 'package:scholarship_application/admin/navigation_bar.dart';
+import 'package:scholarship_application/admins/chat_page.dart';
+import 'package:scholarship_application/admins/navigation_bar.dart';
 import 'package:scholarship_application/components/user_tile.dart';
-import 'package:scholarship_application/pages/login_page.dart';
-import 'package:scholarship_application/services/chat_service.dart';
+import 'package:scholarship_application/authentications/login_page.dart';
+import 'package:scholarship_application/services/chat_services.dart';
 
 class Chatbox extends ConsumerWidget {
   Chatbox({super.key});

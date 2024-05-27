@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:scholarship_application/admin/navigation_bar.dart';
-import 'package:scholarship_application/services/firestore_service.dart';
+import 'package:scholarship_application/admins/navigation_bar.dart';
+import 'package:scholarship_application/services/data_services.dart';
 
 class DetailedGraphPage extends ConsumerStatefulWidget {
   const DetailedGraphPage({super.key});

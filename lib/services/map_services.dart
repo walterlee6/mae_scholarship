@@ -1,8 +1,7 @@
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 
-import 'package:scholarship_application/modal/auto_complete_search.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:scholarship_application/modals/map_auto_complete_search.dart';
 
 class MapServices {
   final String key = 'AIzaSyDI2ktIF7ylE-lfGil4Xf50uOJPuLBH1sU';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:scholarship_application/admin/navigation_bar.dart';
-import 'package:scholarship_application/admin/welcoming_board.dart';
+import 'package:scholarship_application/admins/navigation_bar.dart';
+import 'package:scholarship_application/admins/welcoming_board.dart';
 
 class AdminPage extends StatelessWidget {
   const AdminPage({super.key});

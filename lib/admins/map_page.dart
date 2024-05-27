@@ -4,7 +4,7 @@ import 'package:fab_circular_menu_plus/fab_circular_menu_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:scholarship_application/modal/auto_complete_search.dart';
+import 'package:scholarship_application/modals/map_auto_complete_search.dart';
 import 'package:scholarship_application/providers/search_places.dart';
 import 'package:scholarship_application/services/map_services.dart';
 

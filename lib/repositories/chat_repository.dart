@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:scholarship_application/extensions/extensions.dart';
-import 'package:scholarship_application/modal/bot_message.dart';
+import 'package:scholarship_application/modals/bot_message.dart';
 import 'package:scholarship_application/repositories/storage_repository.dart';
 import 'package:uuid/uuid.dart';
 

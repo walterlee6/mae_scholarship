@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:scholarship_application/modal/auto_complete_search.dart';
+import 'package:scholarship_application/modals/map_auto_complete_search.dart';
 
 final placeResultsProvider = ChangeNotifierProvider<PlaceResults>((ref) {
   return PlaceResults();

@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:scholarship_application/barchart/bar_graph.dart';
+import 'package:scholarship_application/barcharts/bar_graph.dart';
 
 class Chart extends StatefulWidget {
   const Chart({super.key});

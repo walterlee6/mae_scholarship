@@ -1,10 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:scholarship_application/components/my_button.dart';
 import 'package:scholarship_application/components/my_textfield.dart';
-import '../utils/colors.dart';
 
 class LoginPage extends StatefulWidget {
   final Function()? onTap;
@@ -71,7 +69,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
-  Widget build(BuildContext context) { // forgot password hasnt done yet
+  Widget build(BuildContext context) {
+    // forgot password hasnt done yet
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 237, 147, 68),
       body: SafeArea(

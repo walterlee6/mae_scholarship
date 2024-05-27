@@ -1,12 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:scholarship_application/admin/detailed_graph_page.dart';
-import 'package:scholarship_application/admin/verification_page.dart';
+import 'package:scholarship_application/admins/detailed_graph_page.dart';
+import 'package:scholarship_application/admins/verification_page.dart';
 import 'package:scholarship_application/components/my_piechart.dart';
 import 'package:scholarship_application/components/my_wavepainter.dart';
-import 'package:scholarship_application/services/firestore_service.dart';
+import 'package:scholarship_application/services/data_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class WelcomingBoard extends StatefulWidget {

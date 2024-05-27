@@ -1,4 +1,4 @@
-import 'package:scholarship_application/barchart/individual_bar.dart';
+import 'package:scholarship_application/barcharts/individual_bar.dart';
 
 class BarData {
   final double sunAmount;
